@@ -239,6 +239,10 @@ endmacro(add_channel_server_library)
 set(FILENAME "ChannelOptions.cmake")
 file(GLOB FILEPATHS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "*/${FILENAME}")
 
+# 此处额外增加去掉一个文件的内容，urbdrc是一个特殊的动态通道，包含了多个子系统，且不需要在这里处理选项，所以直接过滤掉。
+list(FILTER FILEPATHS EXCLUDE REGEX "^urbdrc/")
+
+
 # We need special treatment for drdynvc:
 # It needs to be the first entry so that every
 # dynamic channel has the dependent options available.
